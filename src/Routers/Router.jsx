@@ -5,6 +5,7 @@ import About from "../Pages/About";
 import Career from "../Pages/Career";
 import HomeLayout from "../Layouts/HomeLayout";
 import ErrorPage from "../Error/ErrorPage";
+import CategoryNews from "../Pages/CategoryNews";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,12 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
+        path: "categories/:catId",
+        loader: () => fetch("/public/news.json"),
+        element: <CategoryNews></CategoryNews>,
+        hydrateFallbackElement: <div>Loading...</div>,
+      },
+      {
         path: "about",
         element: <About></About>,
       },
@@ -28,8 +35,8 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "",
-    element: "",
+    path: "/authentication",
+    element: <div>Authentication layout</div>,
   },
 ]);
 
