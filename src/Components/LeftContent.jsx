@@ -5,7 +5,6 @@ const LeftContent = () => {
   return (
     <div>
       <Categories></Categories>
-      <h1>Dummy news</h1>
     </div>
   );
 };

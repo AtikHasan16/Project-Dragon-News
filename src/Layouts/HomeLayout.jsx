@@ -15,13 +15,13 @@ const HomeLayout = () => {
         <NewsMarquee></NewsMarquee>
         <Navbar></Navbar>
         <div className="grid grid-cols-12 gap-6 my-10">
-          <aside className="col-span-3">
+          <aside className="col-span-3 h-fit sticky top-10">
             <LeftContent></LeftContent>
           </aside>
           <main className="col-span-6">
             <Outlet></Outlet>
           </main>
-          <aside className="col-span-3">
+          <aside className="col-span-3 h-fit sticky top-10">
             <RightContents></RightContents>
           </aside>
         </div>

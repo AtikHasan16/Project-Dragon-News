@@ -6,6 +6,9 @@ import Career from "../Pages/Career";
 import HomeLayout from "../Layouts/HomeLayout";
 import ErrorPage from "../Error/ErrorPage";
 import CategoryNews from "../Pages/CategoryNews";
+import Login from "../Pages/Login";
+import Registration from "../Pages/Registration";
+import AuthLayout from "../Layouts/AuthLayout";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path: "categories/:catId",
-        loader: () => fetch("/public/news.json"),
+        loader: () => fetch("/news.json"),
         element: <CategoryNews></CategoryNews>,
         hydrateFallbackElement: <div>Loading...</div>,
       },
@@ -36,7 +39,14 @@ const router = createBrowserRouter([
   },
   {
     path: "/authentication",
-    element: <div>Authentication layout</div>,
+    element: <AuthLayout></AuthLayout>,
+    children: [
+      { index: true, element: <Login></Login> },
+      {
+        path: "/authentication/registration",
+        element: <Registration></Registration>,
+      },
+    ],
   },
 ]);
 
