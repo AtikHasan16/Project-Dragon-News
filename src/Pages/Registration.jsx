@@ -1,7 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router";
+import AuthContext from "../Contexts/AuthContext";
+import { toast } from "react-toastify";
 
 const Registration = () => {
+  const { createNewUser } = useContext(AuthContext);
+  // console.log(createNewUser);
+
+  const handleForm = (event) => {
+    event.preventDefault();
+    // console.log("form submitted");
+
+    const name = event.target.name.value;
+    const photoURL = event.target.photoURL.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    createNewUser(name, photoURL, email, password)
+      .then((result) => {
+        console.log(result);
+        toast.success("Successfully created the account");
+      })
+      .catch((error) => {
+        toast.error(error.code);
+      });
+  };
+
   return (
     <div>
       <div className="flex flex-col justify-center sm:h-screen p-4">
@@ -9,7 +32,7 @@ const Registration = () => {
           <div className="text-center mb-10 text-3xl font-bold text-gray-700">
             Register your account
           </div>
-          <form>
+          <form onSubmit={handleForm}>
             <div className="space-y-5">
               <div>
                 <label className="text-slate-900 font-medium mb-2 block">
@@ -17,7 +40,7 @@ const Registration = () => {
                 </label>
                 <input
                   className="text-slate-900 bg-white border border-gray-300 w-full text-sm px-4 py-4 rounded-md outline-blue-500"
-                  name="email"
+                  name="name"
                   placeholder="Enter your name"
                   type="text"
                 />
@@ -28,7 +51,7 @@ const Registration = () => {
                 </label>
                 <input
                   className="text-slate-900 bg-white border border-gray-300 w-full text-sm px-4 py-4 rounded-md outline-blue-500"
-                  name="email"
+                  name="photoURL"
                   placeholder="Enter photo URL"
                   type="text"
                 />
@@ -68,20 +91,14 @@ const Registration = () => {
                   htmlFor="remember-me"
                 >
                   I accept the
-                  <a
-                    className="text-blue-600 font-medium hover:underline ml-1"
-                    href="javascript:void(0);"
-                  >
+                  <a className="text-blue-600 font-medium hover:underline ml-1">
                     Terms and Conditions
                   </a>
                 </label>
               </div>
             </div>
             <div className="mt-12">
-              <button
-                className="w-full btn py-6 bg-gray-500 text-white hover:bg-gray-700"
-                type="button"
-              >
+              <button className="w-full btn py-6 bg-gray-500 text-white hover:bg-gray-700">
                 Create an account
               </button>
             </div>

@@ -1,10 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AuthContext from "../Contexts/AuthContext";
+import {
+  createUserWithEmailAndPassword,
+  deleteUser,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
+import { auth } from "../Config/firebase.config";
 
 const AuthProvider = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState(null);
+  const createNewUser = (name, photoURL, email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  const loginUser = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  useEffect(() => {
+    const unsubscribe = () => {
+      onAuthStateChanged(auth, (user) => {
+        setCurrentUser(user);
+      });
+    };
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+  const logOutUser = () => {
+    return signOut(auth);
+  };
+  const deleteCurrentUser = () => {
+    return deleteUser(auth.currentUser);
+  };
+
   const authInfo = {
-    name: "Atik Hasan",
-    email: "akhasannaeem@gmail.com",
+    createNewUser,
+    loginUser,
+    currentUser,
+    logOutUser,
+    deleteCurrentUser,
   };
   return <AuthContext value={authInfo}>{children}</AuthContext>;
 };

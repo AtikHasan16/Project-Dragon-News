@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar from "../Components/Navbar";
 import Container from "../Components/Container";
 import { Link } from "react-router";
-
+import AuthContext from "../Contexts/AuthContext";
+import { toast } from "react-toastify";
 const Login = () => {
+  const { loginUser } = useContext(AuthContext);
+  const handleForm = (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    loginUser(email, password)
+      .then((result) => {
+        console.log(result);
+        toast.success("Successfully Logged In");
+      })
+      .catch((error) => {
+        toast.error(error.code);
+      });
+  };
+
   return (
     <>
       <div>
@@ -14,18 +30,18 @@ const Login = () => {
                 <h1 className="text-slate-900 text-center text-3xl font-semibold">
                   Login your account{" "}
                 </h1>
-                <form className="mt-12 space-y-6">
+                <form onSubmit={handleForm} className="mt-12 space-y-6">
                   <div>
                     <label className="text-slate-500 text-xl font-medium mb-2 block">
-                      User name
+                      User email
                     </label>
                     <div className="relative flex items-center">
                       <input
                         className="w-full text-slate-900 text-sm border border-slate-300 px-4 py-5 pr-8 rounded-md outline-blue-600"
-                        name="username"
-                        placeholder="Enter user name"
+                        name="email"
+                        placeholder="Enter user email"
                         required
-                        type="text"
+                        type="email"
                       />
                     </div>
                   </div>
@@ -65,10 +81,7 @@ const Login = () => {
                     </div>
                   </div>
                   <div className="!mt-12">
-                    <button
-                      className="w-full py-4 px-4 text-lx font-medium tracking-wide rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none cursor-pointer"
-                      type="button"
-                    >
+                    <button className="w-full py-4 px-4 text-lx font-medium tracking-wide rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none cursor-pointer">
                       Sign in
                     </button>
                   </div>
