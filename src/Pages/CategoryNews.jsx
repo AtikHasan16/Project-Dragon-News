@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useLoaderData, useParams } from "react-router";
+import NewsCard from "../Components/NewsCard";
 
 const CategoryNews = () => {
   const newsData = useLoaderData();
   const { catId } = useParams();
   const [NewsByCat, setNewsByCat] = useState([]);
-  console.log(NewsByCat);
+  //   console.log(NewsByCat);
 
   useEffect(() => {
     if (catId == "0") {
@@ -22,7 +23,19 @@ const CategoryNews = () => {
     setNewsByCat(filteredNews);
   }, [catId, newsData]);
 
-  return <div>Category News {NewsByCat.length}</div>;
+  return (
+    <div>
+      <h1 className="text-xl font-bold mb-5">
+        <span className="text-rose-600"> ({NewsByCat.length}) </span>News Found
+      </h1>
+
+      <div className="grid grid-cols-1">
+        {NewsByCat.map((news) => (
+          <NewsCard key={news.id} news={news}></NewsCard>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default CategoryNews;
