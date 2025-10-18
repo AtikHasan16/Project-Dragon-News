@@ -9,6 +9,8 @@ import CategoryNews from "../Pages/CategoryNews";
 import Login from "../Pages/Login";
 import Registration from "../Pages/Registration";
 import AuthLayout from "../Layouts/AuthLayout";
+import NewsDetails from "../Pages/NewsDetails";
+import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,7 @@ const router = createBrowserRouter([
         element: <CategoryNews></CategoryNews>,
         hydrateFallbackElement: <div>Loading...</div>,
       },
+
       {
         path: "about",
         element: <About></About>,
@@ -36,6 +39,14 @@ const router = createBrowserRouter([
         element: <Career></Career>,
       },
     ],
+  },
+  {
+    path: "newsDetails/:id",
+    element: (
+      <PrivateRouter>
+        <NewsDetails></NewsDetails>,
+      </PrivateRouter>
+    ),
   },
   {
     path: "/authentication",

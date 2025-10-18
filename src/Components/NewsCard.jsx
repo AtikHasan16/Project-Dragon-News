@@ -1,6 +1,7 @@
 // src/components/NewsCard.jsx
 
 import { FaRegBookmark, FaShareNodes, FaEye, FaStar } from "react-icons/fa6";
+import { Link } from "react-router";
 
 // A utility to format large numbers (e.g., 6789 -> 6.8k)
 const formatViews = (num) => {
@@ -12,7 +13,16 @@ const formatViews = (num) => {
 
 const NewsCard = ({ news }) => {
   // Destructure the necessary properties from the news object
-  const { author, title, thumbnail_url, details, rating, total_view } = news;
+  const {
+    id,
+    author,
+    title,
+    thumbnail_url,
+    details,
+    rating,
+    total_view,
+    
+  } = news;
 
   // Format the publication date to YYYY-MM-DD
   const publishedDate = new Date(author.published_date)
@@ -59,24 +69,26 @@ const NewsCard = ({ news }) => {
 
       {/* Card Body: Title, Image, and Details */}
       <div className="card-body p-5">
-        <h2 className="card-title text-2xl font-bold mb-4 text-gray-900">
-          {title}
-        </h2>
-        <figure className="mb-5">
-          <img
-            className="w-full h-auto rounded-lg object-cover"
-            src={thumbnail_url}
-            alt={`Image for ${title}`}
-          />
-        </figure>
-        <div className="text-gray-700 leading-relaxed text-base">
-          {truncatedDetails}
-          {details.length > 250 && (
-            <button className="text-primary hover:underline font-semibold ml-1">
-              Read More
-            </button>
-          )}
-        </div>
+        <Link state={news} to={`/newsDetails/${id}`}>
+          <h2 className="card-title text-2xl font-bold mb-4 text-gray-900">
+            {title}
+          </h2>
+          <figure className="mb-5">
+            <img
+              className="w-full h-auto rounded-lg object-cover"
+              src={thumbnail_url}
+              alt={`Image for ${title}`}
+            />
+          </figure>
+          <div className="text-gray-700 leading-relaxed text-base">
+            {truncatedDetails}
+            {details.length > 250 && (
+              <button className="text-primary hover:underline font-semibold ml-1">
+                Read More
+              </button>
+            )}
+          </div>
+        </Link>
 
         <div className="divider my-4"></div>
 
