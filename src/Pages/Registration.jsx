@@ -16,8 +16,8 @@ const Registration = () => {
     const email = event.target.email.value;
     const password = event.target.password.value;
     createNewUser(name, photoURL, email, password)
-      .then((result) => {
-        console.log(result);
+      .then(() => {
+        // console.log(result);
         toast.success("Successfully created the account");
       })
       .catch((error) => {

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
 
   const navigate = useNavigate();
   const { loginUser } = useContext(AuthContext);
@@ -16,8 +16,8 @@ const Login = () => {
     const email = event.target.email.value;
     const password = event.target.password.value;
     loginUser(email, password)
-      .then((result) => {
-        console.log(result);
+      .then(() => {
+        // console.log(result);
         toast.success("Successfully Logged In");
         navigate(`${location.state ? location.state : "/"}`);
       })

@@ -5,7 +5,7 @@ import Loading from "../Pages/Loading";
 
 const PrivateRouter = ({ children }) => {
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
 
   const { currentUser, loading } = useContext(AuthContext);
   if (loading) {
