@@ -25,24 +25,24 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: "categories/:catId",
+        path: "/categories/:catId",
         loader: () => fetch("/news.json"),
         element: <CategoryNews></CategoryNews>,
         hydrateFallbackElement: <Loading></Loading>,
       },
 
       {
-        path: "about",
+        path: "/about",
         element: <About></About>,
       },
       {
-        path: "career",
+        path: "/career",
         element: <Career></Career>,
       },
     ],
   },
   {
-    path: "newsDetails/:id",
+    path: "/newsDetails/:id",
     loader: () => fetch("/news.json"),
     element: (
       <PrivateRouter>
