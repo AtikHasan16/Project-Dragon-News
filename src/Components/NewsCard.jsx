@@ -69,7 +69,7 @@ const NewsCard = ({ news }) => {
 
       {/* Card Body: Title, Image, and Details */}
       <div className="card-body p-5">
-        <Link state={news} to={`/newsDetails/${id}`}>
+        <Link to={`/newsDetails/${id}`}>
           <h2 className="card-title text-2xl font-bold mb-4 text-gray-900">
             {title}
           </h2>

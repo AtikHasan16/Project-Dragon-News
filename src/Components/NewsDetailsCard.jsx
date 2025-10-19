@@ -3,8 +3,8 @@ import { BiLeftArrow } from "react-icons/bi";
 import { FaEye, FaRegBookmark, FaShareNodes, FaStar } from "react-icons/fa6";
 import { Link } from "react-router";
 
-const NewsDetailsCard = ({ newsDetailsData }) => {
-  const { title, thumbnail_url, details, category_id } = newsDetailsData;
+const NewsDetailsCard = ({ newsDetails }) => {
+  const { title, thumbnail_url, details, category_id } = newsDetails;
   return (
     <div>
       <div className="card bg-base-100 shadow-lg border-gray-200 rounded-lg overflow-hidden mb-8">
