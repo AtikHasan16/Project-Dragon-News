@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 const LoginWith = () => {
   const { googleLogin } = useContext(AuthContext);
-  console.log(googleLogin);
+  // console.log(googleLogin);
   const handleGoogleLogin = () => {
     googleLogin()
       .then(() => {

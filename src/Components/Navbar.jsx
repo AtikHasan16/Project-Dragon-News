@@ -1,15 +1,16 @@
 // import React, { useContext } from "react";
 import { BiUserCircle } from "react-icons/bi";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useLocation } from "react-router";
 import AuthContext from "../Contexts/AuthContext";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 
-const Navbar = ({ location = '' }) => {
+const Navbar = ({ location = "" }) => {
   const { currentUser, logOutUser } = useContext(AuthContext);
-  // console.log(currentUser);
+  console.log(currentUser?.photoURL);
 
-  // console.log(location);
+  const currLocation = useLocation();
+  // console.log(currLocation);
 
   const handleLogOut = () => {
     logOutUser()
@@ -47,7 +48,27 @@ const Navbar = ({ location = '' }) => {
         {currentUser ? (
           <>
             <Link to={"/profile"}>
-              <BiUserCircle className="text-5xl"></BiUserCircle>
+              <div className="relative w-max group mx-auto ">
+                {currentUser?.photoURL ? (
+                  <div className="w-6/12 rounded-full overflow-hidden mx-auto bg-gray-50">
+                    <img
+                      className="w-full h-full "
+                      src={
+                        currentUser.photoURL ||
+                        "https://readymadeui.com/team-5.webp"
+                      }
+                      alt={"user photo"}
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                ) : (
+                  <BiUserCircle className="text-5xl"></BiUserCircle>
+                )}
+
+                <div className="max-w-xs mx-auto absolute shadow-lg hidden group-hover:block bg-gray-500 text-white font-semibold px-3 py-[6px] text-[13px] w-max -bottom-10 rounded ">
+                  View Profile
+                </div>
+              </div>
             </Link>
 
             <button
@@ -62,11 +83,19 @@ const Navbar = ({ location = '' }) => {
             {/* <Link to={"/authentication/registration"}>
               <BiUserCircle className="text-5xl"></BiUserCircle>
             </Link> */}
-            <Link to={"/authentication"}>
-              <button className="btn text-xl bg-gray-700 py-6 px-10 text-white">
-                Login
-              </button>
-            </Link>
+            {currLocation?.pathname === "/authentication" ? (
+              <Link to={"/authentication/registration"}>
+                <button className="btn text-xl bg-gray-700 py-6 px-10 text-white">
+                  SignUp
+                </button>
+              </Link>
+            ) : (
+              <Link to={"/authentication"}>
+                <button className="btn text-xl bg-gray-700 py-6 px-10 text-white">
+                  Login
+                </button>
+              </Link>
+            )}
           </>
         )}
       </div>

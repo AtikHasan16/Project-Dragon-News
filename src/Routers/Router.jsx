@@ -12,6 +12,7 @@ import AuthLayout from "../Layouts/AuthLayout";
 import NewsDetails from "../Pages/NewsDetails";
 import PrivateRouter from "./PrivateRouter";
 import Loading from "../Pages/Loading";
+import ProfileLayout from "../Layouts/ProfileLayout";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,14 @@ const router = createBrowserRouter([
         element: <Registration></Registration>,
       },
     ],
+  },
+  {
+    path: "profile",
+    element: (
+      <PrivateRouter>
+        <ProfileLayout></ProfileLayout>
+      </PrivateRouter>
+    ),
   },
 ]);
 

@@ -5,7 +5,7 @@ import AuthContext from "../Contexts/AuthContext";
 
 const RightContents = () => {
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
+  // console.log(currentUser);
 
   return (
     <div className="">
