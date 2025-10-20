@@ -1,18 +1,16 @@
 // import React, { useContext } from "react";
 import { BiUserCircle } from "react-icons/bi";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import AuthContext from "../Contexts/AuthContext";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 
-const Navbar = () => {
+const Navbar = ({ location = '' }) => {
   const { currentUser, logOutUser } = useContext(AuthContext);
   // console.log(currentUser);
 
+  // console.log(location);
 
-
-
-  
   const handleLogOut = () => {
     logOutUser()
       .then(() => {
@@ -28,15 +26,20 @@ const Navbar = () => {
         <h1 className="text-2xl font-bold">The Dragon</h1>
       </div>
       <div className="">
-        <ul className="flex gap-6 font-medium text-gray-500">
+        <ul className="flex items-center gap-6 font-medium text-gray-500">
           <li>
-            <Link to={"/"}>Home</Link>
+            <Link
+              to={"/"}
+              className={`${location.includes("categories") ? "btn" : ""}`}
+            >
+              Home
+            </Link>
           </li>
           <li>
-            <Link to={"/about"}>About</Link>
+            <NavLink to={"/about"}>About</NavLink>
           </li>
           <li>
-            <Link to={"/career"}>Career</Link>
+            <NavLink to={"/career"}>Career</NavLink>
           </li>
         </ul>
       </div>
@@ -56,7 +59,7 @@ const Navbar = () => {
           </>
         ) : (
           <>
-          {/* <Link to={"/authentication/registration"}>
+            {/* <Link to={"/authentication/registration"}>
               <BiUserCircle className="text-5xl"></BiUserCircle>
             </Link> */}
             <Link to={"/authentication"}>

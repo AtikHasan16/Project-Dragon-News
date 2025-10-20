@@ -1,6 +1,5 @@
-import React from "react";
 import Header from "../Components/Header";
-import { Outlet, useNavigation } from "react-router";
+import { Outlet, useLocation, useNavigation } from "react-router";
 import RightContents from "../Components/RightContents";
 import Container from "../Components/Container";
 import Navbar from "../Components/Navbar";
@@ -9,13 +8,16 @@ import LeftContent from "../Components/LeftContent";
 import Loading from "../Pages/Loading";
 
 const HomeLayout = () => {
+  const location = useLocation();
+  // console.log(location);
+
   const { state } = useNavigation();
   return (
     <div>
       <Container>
         <Header></Header>
         <NewsMarquee></NewsMarquee>
-        <Navbar></Navbar>
+        <Navbar location={location.pathname}></Navbar>
         <div className="grid grid-cols-12 gap-6 my-10">
           <aside className="col-span-3 h-fit sticky top-10">
             <LeftContent></LeftContent>
